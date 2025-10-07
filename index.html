@@ -51,6 +51,13 @@
             margin-top: 1px;
         }
         
+        .privacy-note {
+            font-size: 6.5pt;
+            color: #666;
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        
         .info-bar {
             display: grid;
             grid-template-columns: 2.5fr 1.5fr 0.7fr 1.3fr;
@@ -191,6 +198,13 @@
             text-align: center;
         }
         
+        .helper-hint {
+            font-size: 6.5pt;
+            color: #666;
+            font-style: italic;
+            margin-left: 2px;
+        }
+        
         .scale-bar {
             display: flex;
             justify-content: space-around;
@@ -282,7 +296,6 @@
             color: #666;
             text-align: center;
         }
-
     </style>
 </head>
 <body>
@@ -290,6 +303,8 @@
         <div class="title">My Daily Growth Tracker</div>
         <div class="barcode">CBIP-DGT-V3</div>
     </div>
+    
+    <div class="privacy-note">This is your private record, protected by educational privacy laws</div>
     
     <div class="info-bar">
         <div>
@@ -337,11 +352,17 @@
                 <div class="plan-title"><span class="woop-letter" style="width: 22px; height: 22px; font-size: 11pt; display: inline-flex; margin-right: 4px; vertical-align: middle;">P</span>My Plan</div>
                 <div class="plan-row">
                     <div class="plan-label">IF</div>
-                    <div class="write-field"></div>
+                    <div>
+                        <div class="write-field"></div>
+                        <div class="helper-hint">When I notice my obstacle happening...</div>
+                    </div>
                 </div>
                 <div class="plan-row">
                     <div class="plan-label">THEN</div>
-                    <div class="write-field"></div>
+                    <div>
+                        <div class="write-field"></div>
+                        <div class="helper-hint">I will do this one small thing...</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -464,22 +485,22 @@
             <div style="margin-bottom: 8px;">
                 <div class="field-label" style="text-align: left;">Today felt:</div>
                 <div class="bubble-group" style="justify-content: flex-start;">
-                    <div class="bubble-opt"><span class="bubble"></span> Hard</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Challenging</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Okay</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Good</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Great</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 😰 Hard</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 😅 Challenging</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 😐 Okay</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 🙂 Good</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 😊 Great</div>
                 </div>
             </div>
             
             <div style="margin-bottom: 8px;">
                 <div class="field-label" style="text-align: left;">My IF-THEN plan was:</div>
                 <div class="bubble-group" style="justify-content: flex-start;">
-                    <div class="bubble-opt"><span class="bubble"></span> I forgot it</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Hard to use</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Helpful</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Felt automatic!</div>
-                    <div class="bubble-opt"><span class="bubble"></span> Didn't need it</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 🤔 I forgot it</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 😓 Hard to use</div>
+                    <div class="bubble-opt"><span class="bubble"></span> 👍 Helpful</div>
+                    <div class="bubble-opt"><span class="bubble"></span> ⚡ Felt automatic!</div>
+                    <div class="bubble-opt"><span class="bubble"></span> ✅ Didn't need it</div>
                 </div>
             </div>
             
