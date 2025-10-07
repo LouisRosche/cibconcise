@@ -7,12 +7,11 @@
     <style>
         @page {
             size: letter;
-            margin: 0.35in;
+            margin: 0.4in 0.35in;
         }
         
         @media print {
             body { margin: 0; padding: 0; }
-            .page-break { page-break-after: always; }
         }
         
         * {
@@ -23,551 +22,464 @@
         
         body {
             font-family: 'Arial', sans-serif;
-            font-size: 10pt;
-            line-height: 1.3;
+            font-size: 8pt;
+            line-height: 1.2;
             color: #000;
             background: #fff;
             max-width: 8.5in;
             margin: 0 auto;
-            padding: 0.35in;
+            padding: 0.4in 0.35in;
         }
         
-        .form-header {
+        .header {
             text-align: center;
-            margin-bottom: 8px;
-            padding-bottom: 4px;
+            padding-bottom: 3px;
             border-bottom: 2px solid #000;
-        }
-        
-        .form-title {
-            font-size: 16pt;
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-        
-        .barcode-area {
-            height: 20px;
-            border: 1px solid #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Courier New', monospace;
-            font-size: 6pt;
-            background: #fafafa;
-            margin-top: 3px;
-            color: #666;
-        }
-        
-        .info-section {
-            margin-bottom: 10px;
-            padding: 8px;
-            background: #f9f9f9;
-            border: 1.5px solid #666;
-            border-radius: 3px;
-        }
-        
-        .field-row {
-            display: grid;
-            gap: 8px;
             margin-bottom: 6px;
         }
         
-        .two-col { grid-template-columns: 1fr 1fr; }
-        .three-col { grid-template-columns: 2fr 1fr 1fr; }
+        .title {
+            font-size: 15pt;
+            font-weight: bold;
+        }
+        
+        .barcode {
+            font-size: 5pt;
+            color: #666;
+            font-family: monospace;
+            margin-top: 1px;
+        }
+        
+        .info-bar {
+            display: grid;
+            grid-template-columns: 2fr 1.2fr 0.6fr 0.8fr;
+            gap: 6px;
+            margin-bottom: 6px;
+            padding: 4px;
+            background: #f5f5f5;
+            border: 1px solid #999;
+        }
         
         .field-label {
             font-weight: bold;
-            font-size: 9pt;
-            margin-bottom: 2px;
-            color: #333;
+            font-size: 7pt;
+            margin-bottom: 1px;
         }
         
-        .write-in-field {
-            border-bottom: 2px solid #000;
-            min-height: 24px;
-            background: #fff;
-            padding: 2px 4px;
+        .write-field {
+            border-bottom: 1.5px solid #000;
+            min-height: 16px;
         }
         
         .bubble-group {
             display: flex;
-            gap: 12px;
-            margin-top: 3px;
+            gap: 6px;
             flex-wrap: wrap;
+        }
+        
+        .bubble-opt {
+            display: flex;
             align-items: center;
+            gap: 2px;
+            font-size: 7pt;
         }
         
-        .bubble-option { 
-            display: flex; 
-            align-items: center; 
-            gap: 5px;
-            font-size: 9pt;
+        .bubble {
+            width: 11px;
+            height: 11px;
+            border: 1.5px solid #000;
+            border-radius: 50%;
+            flex-shrink: 0;
         }
         
-        .bubble { 
-            width: 16px; 
-            height: 16px; 
-            border: 2px solid #000; 
-            border-radius: 50%; 
-            flex-shrink: 0; 
-        }
-        
-        .checkbox { 
-            width: 15px; 
-            height: 15px; 
-            border: 2px solid #000; 
-            flex-shrink: 0; 
+        .checkbox {
+            width: 10px;
+            height: 10px;
+            border: 1.5px solid #000;
+            flex-shrink: 0;
         }
         
         .section {
-            border: 2px solid #333;
-            margin-bottom: 12px;
-            page-break-inside: avoid;
-            border-radius: 3px;
-            overflow: hidden;
+            border: 1.5px solid #333;
+            margin-bottom: 5px;
         }
         
-        .section-header {
+        .section-head {
             background: #333;
             color: #fff;
-            padding: 5px 10px;
+            padding: 2px 6px;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        
+        .section-body {
+            padding: 5px;
+        }
+        
+        .woop-grid {
+            display: grid;
+            grid-template-columns: 25px 1fr;
+            gap: 4px;
+            align-items: start;
+            margin-bottom: 4px;
+        }
+        
+        .woop-letter {
+            width: 22px;
+            height: 22px;
+            background: #333;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
             font-size: 11pt;
         }
         
-        .section-content { 
-            padding: 10px;
-            background: #fff;
-        }
-        
-        .woop-item {
-            margin-bottom: 10px;
-            padding: 8px;
-            background: #f5f5f5;
-            border-left: 4px solid #666;
-        }
-        
-        .woop-letter {
-            display: inline-block;
-            width: 26px;
-            height: 26px;
-            background: #333;
-            color: #fff;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 26px;
-            font-weight: bold;
-            font-size: 12pt;
-            margin-right: 8px;
-            flex-shrink: 0;
+        .woop-content {
+            font-size: 7pt;
         }
         
         .woop-label {
             font-weight: bold;
-            font-size: 9pt;
-            color: #333;
-            margin-bottom: 4px;
+            margin-bottom: 1px;
         }
         
-        .write-space {
-            border: 1.5px solid #999;
-            min-height: 40px;
+        .write-area {
+            border: 1px solid #999;
+            min-height: 20px;
             background: #fff;
+            padding: 1px 2px;
+        }
+        
+        .plan-box {
+            border: 1.5px solid #444;
             padding: 4px;
-            margin-top: 4px;
-            line-height: 1.4;
-        }
-        
-        .lined-space {
-            border: 1.5px solid #999;
-            min-height: 38px;
-            background: 
-                repeating-linear-gradient(
-                    transparent,
-                    transparent 19px,
-                    #ddd 19px,
-                    #ddd 20px
-                );
-            padding: 2px 6px;
-            line-height: 20px;
-        }
-        
-        .if-then-plan {
-            border: 2px solid #444;
-            padding: 10px;
-            margin-top: 8px;
             background: #fafafa;
+            margin-top: 3px;
         }
         
-        .plan-step {
-            margin-bottom: 8px;
+        .plan-row {
+            display: grid;
+            grid-template-columns: 35px 1fr;
+            gap: 3px;
+            margin-bottom: 3px;
+            align-items: center;
         }
         
         .plan-label {
-            font-weight: bold;
-            font-size: 10pt;
-            display: inline-block;
-            width: 45px;
             background: #444;
             color: #fff;
-            padding: 2px 6px;
-            margin-right: 6px;
-        }
-        
-        .helper-text {
+            padding: 1px 4px;
+            font-weight: bold;
             font-size: 8pt;
-            color: #666;
-            font-style: italic;
-            margin-left: 4px;
+            text-align: center;
         }
         
-        .scale-guide {
+        .scale-bar {
             display: flex;
             justify-content: space-around;
-            padding: 8px;
-            background: #f0f0f0;
-            border: 2px solid #666;
-            margin-bottom: 8px;
-            border-radius: 3px;
+            padding: 3px;
+            background: #e8e8e8;
+            border: 1px solid #999;
+            margin-bottom: 3px;
         }
         
-        .scale-item { 
+        .scale-item {
             text-align: center;
-            flex: 1;
         }
         
-        .scale-number { 
+        .scale-num {
             display: block;
-            font-size: 16pt;
+            font-size: 13pt;
             font-weight: bold;
-            color: #333;
         }
         
-        .scale-desc { 
-            display: block;
-            font-size: 8pt;
+        .scale-text {
+            font-size: 6pt;
             color: #555;
-            margin-top: 2px;
         }
         
-        .practice-instructions {
+        .instructions {
             background: #e3f2fd;
-            border-left: 4px solid #1976d2;
-            padding: 6px 10px;
-            margin-bottom: 8px;
-            font-size: 8.5pt;
+            padding: 2px 4px;
+            margin-bottom: 3px;
+            font-size: 6.5pt;
             color: #1565c0;
         }
         
-        .score-table {
+        .practice-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 6px;
         }
         
-        .score-table th { 
-            background: #e0e0e0;
-            border: 1.5px solid #666;
-            padding: 4px;
-            font-size: 8pt;
+        .practice-table th {
+            background: #ddd;
+            border: 1px solid #666;
+            padding: 2px;
+            font-size: 6.5pt;
             font-weight: bold;
-            text-align: center;
         }
         
-        .score-table td { 
-            border: 1.5px solid #999;
-            padding: 4px;
+        .practice-table td {
+            border: 1px solid #999;
+            padding: 2px;
             text-align: center;
-            min-height: 32px;
+            font-size: 7pt;
         }
         
-        .period-cell {
+        .period-col {
             background: #f5f5f5;
             font-weight: bold;
-            font-size: 10pt;
         }
         
-        .class-cell {
+        .class-col {
             text-align: left;
-            background: #fff;
         }
         
-        .score-bubbles { 
+        .score-bubbles {
             display: flex;
             justify-content: center;
-            gap: 6px;
+            gap: 3px;
         }
         
-        .score-bubble { 
-            width: 18px;
-            height: 18px;
-            border: 2px solid #333;
+        .score-bubble {
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid #333;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8.5pt;
+            font-size: 7pt;
             font-weight: bold;
         }
         
-        .summary-grid {
+        .reflection-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 4px;
+            margin-bottom: 4px;
         }
         
         .summary-box {
-            border: 2px solid #666;
-            padding: 8px;
+            border: 1px solid #666;
+            padding: 3px;
             text-align: center;
             background: #fafafa;
         }
         
         .summary-label {
-            font-size: 8pt;
+            font-size: 6pt;
             font-weight: bold;
-            color: #555;
-            margin-bottom: 4px;
+            margin-bottom: 1px;
         }
         
         .summary-field {
-            border-bottom: 2px solid #000;
-            min-height: 28px;
-            background: #fff;
-            margin-top: 2px;
+            border-bottom: 1.5px solid #000;
+            min-height: 18px;
         }
         
-        .reflection-note {
-            font-size: 8pt;
-            color: #666;
-            font-style: italic;
-            text-align: center;
-            margin-top: 4px;
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+        
+        .feeling-row {
+            margin-bottom: 4px;
+        }
+        
+        .lined-area {
+            border: 1px solid #999;
+            min-height: 18px;
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 11px,
+                #ddd 11px,
+                #ddd 11.5px
+            );
+            padding: 1px 3px;
+        }
+        
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 5px;
+        }
+        
+        .consent {
+            border: 1.5px solid #666;
             padding: 4px;
-        }
-        
-        .consent-area {
-            border: 2px solid #666;
-            padding: 10px;
-            margin-top: 12px;
+            margin-top: 4px;
             background: #fffef7;
-            border-radius: 3px;
             text-align: center;
-            font-size: 8.5pt;
+            font-size: 6.5pt;
         }
         
-        .signature-line {
-            margin-top: 8px;
+        .sig-line {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: 8px;
-        }
-        
-        .sig-label {
-            font-size: 8pt;
-            font-weight: bold;
+            gap: 5px;
+            margin-top: 3px;
         }
         
         .sig-field {
-            border-bottom: 2px solid #000;
-            width: 250px;
-            height: 24px;
+            border-bottom: 1.5px solid #000;
+            width: 200px;
+            height: 16px;
         }
         
-        .page-footer {
-            margin-top: 10px;
-            padding-top: 6px;
+        .footer {
+            margin-top: 4px;
+            padding-top: 2px;
             border-top: 1px solid #ccc;
-            display: flex;
-            justify-content: space-between;
-            font-size: 7pt;
-            color: #666;
-        }
-        
-        .privacy-note {
-            font-size: 7pt;
+            font-size: 6pt;
             color: #666;
             text-align: center;
-            margin-bottom: 8px;
+        }
+        
+        .helper {
+            font-size: 6pt;
+            color: #666;
+            font-style: italic;
         }
 
     </style>
 </head>
 <body>
-    <div class="form-header">
-        <div class="form-title">My Daily Growth Tracker</div>
-        <div class="barcode-area">CBIP-DGT-V3</div>
+    <div class="header">
+        <div class="title">My Daily Growth Tracker</div>
+        <div class="barcode">CBIP-DGT-V3-SINGLE</div>
     </div>
     
-    <div class="privacy-note">This is your private record, protected by educational privacy laws</div>
-    
-    <div class="info-section">
-        <div class="field-row two-col">
-            <div>
-                <div class="field-label">My Name</div>
-                <div class="write-in-field"></div>
-            </div>
-            <div>
-                <div class="field-label">Today's Date</div>
-                <div class="write-in-field"></div>
+    <div class="info-bar">
+        <div>
+            <div class="field-label">My Name</div>
+            <div class="write-field"></div>
+        </div>
+        <div>
+            <div class="field-label">Date</div>
+            <div class="write-field"></div>
+        </div>
+        <div>
+            <div class="field-label">Week #</div>
+            <div class="write-field"></div>
+        </div>
+        <div>
+            <div class="field-label">Day</div>
+            <div class="bubble-group">
+                <div class="bubble-opt"><span class="bubble"></span>M</div>
+                <div class="bubble-opt"><span class="bubble"></span>T</div>
+                <div class="bubble-opt"><span class="bubble"></span>W</div>
+                <div class="bubble-opt"><span class="bubble"></span>Th</div>
+                <div class="bubble-opt"><span class="bubble"></span>F</div>
             </div>
         </div>
-        <div class="field-row three-col">
-            <div>
-                <div class="field-label">Day</div>
-                <div class="bubble-group">
-                    <div class="bubble-option"><span class="bubble"></span> Mon</div>
-                    <div class="bubble-option"><span class="bubble"></span> Tue</div>
-                    <div class="bubble-option"><span class="bubble"></span> Wed</div>
-                    <div class="bubble-option"><span class="bubble"></span> Thu</div>
-                    <div class="bubble-option"><span class="bubble"></span> Fri</div>
+    </div>
+    
+    <div class="section">
+        <div class="section-head">My Success Plan <span style="font-weight: normal; font-size: 7pt;">(Fill out when starting new goal)</span></div>
+        <div class="section-body">
+            <div class="woop-grid">
+                <div class="woop-letter">W</div>
+                <div class="woop-content">
+                    <div class="woop-label">My Wish - What skill do I want to grow?</div>
+                    <div class="write-area"></div>
                 </div>
             </div>
-            <div>
-                <div class="field-label">Week #</div>
-                <div class="write-in-field"></div>
+            <div class="woop-grid">
+                <div class="woop-letter">O</div>
+                <div class="woop-content">
+                    <div class="woop-label">My Obstacle - What makes this hard?</div>
+                    <div class="write-area"></div>
+                </div>
             </div>
-            <div>
-                <div class="field-label">New Goal?</div>
-                <div class="bubble-group">
-                    <div class="bubble-option"><span class="checkbox"></span> Yes</div>
-                    <div class="bubble-option"><span class="checkbox"></span> No</div>
+            <div class="plan-box">
+                <div style="font-weight: bold; font-size: 7.5pt; margin-bottom: 2px;"><span class="woop-letter" style="width: 18px; height: 18px; font-size: 9pt; display: inline-flex; margin-right: 3px;">P</span>My Plan</div>
+                <div class="plan-row">
+                    <div class="plan-label">IF</div>
+                    <div class="write-field"></div>
+                </div>
+                <div class="plan-row">
+                    <div class="plan-label">THEN</div>
+                    <div class="write-field"></div>
                 </div>
             </div>
         </div>
     </div>
     
     <div class="section">
-        <div class="section-header">My Success Plan (Fill out when starting a new goal)</div>
-        <div class="section-content">
-            <div class="woop-item">
-                <div style="display: flex; align-items: flex-start;">
-                    <span class="woop-letter">W</span>
-                    <div style="flex: 1;">
-                        <div class="woop-label">My Wish - What skill do I want to grow?</div>
-                        <div class="write-space"></div>
-                    </div>
-                </div>
+        <div class="section-head">Today's Practice</div>
+        <div class="section-body">
+            <div class="scale-bar">
+                <div class="scale-item"><span class="scale-num">4</span><span class="scale-text">Got it!</span></div>
+                <div class="scale-item"><span class="scale-num">3</span><span class="scale-text">Better</span></div>
+                <div class="scale-item"><span class="scale-num">2</span><span class="scale-text">Working</span></div>
+                <div class="scale-item"><span class="scale-num">1</span><span class="scale-text">Starting</span></div>
+                <div class="scale-item"><span class="scale-num">0</span><span class="scale-text">Not today</span></div>
             </div>
-            
-            <div class="woop-item">
-                <div style="display: flex; align-items: flex-start;">
-                    <span class="woop-letter">O</span>
-                    <div style="flex: 1;">
-                        <div class="woop-label">My Obstacle - What makes this hard for me?</div>
-                        <div class="write-space"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="if-then-plan">
-                <div style="font-weight: bold; font-size: 10pt; margin-bottom: 8px;">
-                    <span class="woop-letter" style="margin-right: 6px;">P</span>My Plan
-                </div>
-                <div class="plan-step">
-                    <span class="plan-label">IF</span>
-                    <span class="helper-text">When I notice my obstacle happening...</span>
-                    <div class="write-in-field" style="margin-top: 4px;"></div>
-                </div>
-                <div class="plan-step">
-                    <span class="plan-label">THEN</span>
-                    <span class="helper-text">I will do this one small thing...</span>
-                    <div class="write-in-field" style="margin-top: 4px;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <div class="section-header">Today's Practice - How Did I Do?</div>
-        <div class="section-content">
-            <div class="scale-guide">
-                <div class="scale-item">
-                    <span class="scale-number">4</span>
-                    <span class="scale-desc">I've got this!</span>
-                </div>
-                <div class="scale-item">
-                    <span class="scale-number">3</span>
-                    <span class="scale-desc">Getting better</span>
-                </div>
-                <div class="scale-item">
-                    <span class="scale-number">2</span>
-                    <span class="scale-desc">Working on it</span>
-                </div>
-                <div class="scale-item">
-                    <span class="scale-number">1</span>
-                    <span class="scale-desc">Just starting</span>
-                </div>
-                <div class="scale-item">
-                    <span class="scale-number">0</span>
-                    <span class="scale-desc">Not today</span>
-                </div>
-            </div>
-            
-            <div class="practice-instructions">
-                Fill in ONE bubble for each score. Mark whether you used your plan (Yes/No/Didn't Need It).
-            </div>
-            
-            <table class="score-table">
+            <div class="instructions">Fill ONE bubble per score. Mark if you used your plan (Y/N/NA).</div>
+            <table class="practice-table">
                 <thead>
                     <tr>
-                        <th style="width: 6%;">Period</th>
-                        <th style="width: 18%;">Class/Subject</th>
-                        <th style="width: 24%;">My Score</th>
-                        <th style="width: 24%;">Teacher Score</th>
-                        <th style="width: 11%;">Used Plan?</th>
-                        <th style="width: 17%;">Notes</th>
+                        <th style="width: 5%;">Per</th>
+                        <th style="width: 16%;">Class</th>
+                        <th style="width: 23%;">My Score</th>
+                        <th style="width: 23%;">Teacher Score</th>
+                        <th style="width: 12%;">Plan?</th>
+                        <th style="width: 21%;">Notes</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="period-cell">1</td>
-                        <td class="class-cell"></td>
+                        <td class="period-col">1</td>
+                        <td class="class-col"></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div style="display: flex; gap: 2px; justify-content: center; font-size: 7.5pt;"><div class="bubble-option"><span class="checkbox"></span>Y</div><div class="bubble-option"><span class="checkbox"></span>N</div><div class="bubble-option"><span class="checkbox"></span>NA</div></div></td>
+                        <td><div class="bubble-group" style="justify-content: center;"><div class="bubble-opt"><span class="checkbox"></span>Y</div><div class="bubble-opt"><span class="checkbox"></span>N</div><div class="bubble-opt"><span class="checkbox"></span>NA</div></div></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="period-cell">2</td>
-                        <td class="class-cell"></td>
+                        <td class="period-col">2</td>
+                        <td class="class-col"></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div style="display: flex; gap: 2px; justify-content: center; font-size: 7.5pt;"><div class="bubble-option"><span class="checkbox"></span>Y</div><div class="bubble-option"><span class="checkbox"></span>N</div><div class="bubble-option"><span class="checkbox"></span>NA</div></div></td>
+                        <td><div class="bubble-group" style="justify-content: center;"><div class="bubble-opt"><span class="checkbox"></span>Y</div><div class="bubble-opt"><span class="checkbox"></span>N</div><div class="bubble-opt"><span class="checkbox"></span>NA</div></div></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="period-cell">3</td>
-                        <td class="class-cell"></td>
+                        <td class="period-col">3</td>
+                        <td class="class-col"></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div style="display: flex; gap: 2px; justify-content: center; font-size: 7.5pt;"><div class="bubble-option"><span class="checkbox"></span>Y</div><div class="bubble-option"><span class="checkbox"></span>N</div><div class="bubble-option"><span class="checkbox"></span>NA</div></div></td>
+                        <td><div class="bubble-group" style="justify-content: center;"><div class="bubble-opt"><span class="checkbox"></span>Y</div><div class="bubble-opt"><span class="checkbox"></span>N</div><div class="bubble-opt"><span class="checkbox"></span>NA</div></div></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="period-cell">4</td>
-                        <td class="class-cell"></td>
+                        <td class="period-col">4</td>
+                        <td class="class-col"></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div style="display: flex; gap: 2px; justify-content: center; font-size: 7.5pt;"><div class="bubble-option"><span class="checkbox"></span>Y</div><div class="bubble-option"><span class="checkbox"></span>N</div><div class="bubble-option"><span class="checkbox"></span>NA</div></div></td>
+                        <td><div class="bubble-group" style="justify-content: center;"><div class="bubble-opt"><span class="checkbox"></span>Y</div><div class="bubble-opt"><span class="checkbox"></span>N</div><div class="bubble-opt"><span class="checkbox"></span>NA</div></div></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="period-cell">5</td>
-                        <td class="class-cell"></td>
+                        <td class="period-col">5</td>
+                        <td class="class-col"></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div style="display: flex; gap: 2px; justify-content: center; font-size: 7.5pt;"><div class="bubble-option"><span class="checkbox"></span>Y</div><div class="bubble-option"><span class="checkbox"></span>N</div><div class="bubble-option"><span class="checkbox"></span>NA</div></div></td>
+                        <td><div class="bubble-group" style="justify-content: center;"><div class="bubble-opt"><span class="checkbox"></span>Y</div><div class="bubble-opt"><span class="checkbox"></span>N</div><div class="bubble-opt"><span class="checkbox"></span>NA</div></div></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td class="period-cell">6</td>
-                        <td class="class-cell"></td>
+                        <td class="period-col">6</td>
+                        <td class="class-col"></td>
                         <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">3</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
-                        <td><div style="display: flex; gap: 2px; justify-content: center; font-size: 7.5pt;"><div class="bubble-option"><span class="checkbox"></span>Y</div><div class="bubble-option"><span class="checkbox"></span>N</div><div class="bubble-option"><span class="checkbox"></span>NA</div></div></td>
+                        <td><div class="score-bubbles"><span class="score-bubble">0</span><span class="score-bubble">1</span><span class="score-bubble">2</span><span class="score-bubble">3</span><span class="score-bubble">4</span></div></td>
+                        <td><div class="bubble-group" style="justify-content: center;"><div class="bubble-opt"><span class="checkbox"></span>Y</div><div class="bubble-opt"><span class="checkbox"></span>N</div><div class="bubble-opt"><span class="checkbox"></span>NA</div></div></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -575,133 +487,81 @@
         </div>
     </div>
     
-    <div class="page-footer">
-        <span>My Daily Growth Tracker v3</span>
-        <span style="font-weight: bold;">PAGE 1 of 2</span>
-    </div>
-
-    <div class="page-break"></div>
-
-    <div class="form-header">
-        <div class="form-title" style="font-size: 14pt;">Reflection & Tomorrow's Plan</div>
-        <div style="font-size: 9pt; margin-top: 4px;">
-            <span style="margin-right: 20px;">Name: _________________</span>
-            <span>Date: __________</span>
-        </div>
-    </div>
-
     <div class="section">
-        <div class="section-header">Today's Summary</div>
-        <div class="section-content">
-            <div class="summary-grid">
+        <div class="section-head">My Day Summary & Reflection</div>
+        <div class="section-body">
+            <div class="reflection-grid">
                 <div class="summary-box">
-                    <div class="summary-label">My Average Score</div>
+                    <div class="summary-label">My Avg</div>
                     <div class="summary-field"></div>
                 </div>
                 <div class="summary-box">
-                    <div class="summary-label">Teacher Average Score</div>
+                    <div class="summary-label">Teacher Avg</div>
                     <div class="summary-field"></div>
                 </div>
                 <div class="summary-box">
-                    <div class="summary-label">Times I Used My Plan</div>
+                    <div class="summary-label">Used Plan</div>
                     <div class="summary-field"></div>
                 </div>
             </div>
-            <div class="reflection-note">
-                Remember: Different scores just mean we see things differently - that's okay and worth talking about!
-            </div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <div class="section-header">How I'm Feeling (Take 3-5 minutes)</div>
-        <div class="section-content">
-            <div style="margin-bottom: 10px;">
+            
+            <div class="feeling-row">
                 <div class="field-label">Today felt:</div>
                 <div class="bubble-group">
-                    <div class="bubble-option"><span class="bubble"></span> Hard</div>
-                    <div class="bubble-option"><span class="bubble"></span> Challenging</div>
-                    <div class="bubble-option"><span class="bubble"></span> Okay</div>
-                    <div class="bubble-option"><span class="bubble"></span> Good</div>
-                    <div class="bubble-option"><span class="bubble"></span> Great</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Hard</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Okay</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Good</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Great</div>
                 </div>
             </div>
             
-            <div style="margin-bottom: 10px;">
-                <div class="field-label">My IF-THEN plan was:</div>
+            <div class="feeling-row">
+                <div class="field-label">My plan was:</div>
                 <div class="bubble-group">
-                    <div class="bubble-option"><span class="bubble"></span> I forgot it</div>
-                    <div class="bubble-option"><span class="bubble"></span> Hard to use</div>
-                    <div class="bubble-option"><span class="bubble"></span> Helpful</div>
-                    <div class="bubble-option"><span class="bubble"></span> Felt automatic!</div>
-                    <div class="bubble-option"><span class="bubble"></span> Didn't need it</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Forgot</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Hard</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Helpful</div>
+                    <div class="bubble-opt"><span class="bubble"></span> Automatic</div>
                 </div>
             </div>
             
-            <div style="margin-bottom: 10px;">
-                <div class="field-label">My biggest win today (any size counts!):</div>
-                <div class="lined-space"></div>
+            <div class="two-col" style="margin-bottom: 4px;">
+                <div>
+                    <div class="field-label">My win today:</div>
+                    <div class="lined-area"></div>
+                </div>
+                <div>
+                    <div class="field-label">Tomorrow I'll focus on:</div>
+                    <div class="lined-area"></div>
+                </div>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="teacher-grid">
                 <div>
-                    <div class="field-label">A tough moment was:</div>
-                    <div class="lined-space"></div>
+                    <div class="field-label">Teacher: Strength I saw:</div>
+                    <div class="lined-area"></div>
                 </div>
                 <div>
-                    <div class="field-label">A moment I'm proud of:</div>
-                    <div class="lined-space"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <div class="section-header">Looking Ahead to Tomorrow</div>
-        <div class="section-content">
-            <div style="margin-bottom: 10px;">
-                <div class="field-label">One small thing I'll focus on:</div>
-                <div class="lined-space"></div>
-            </div>
-            <div>
-                <div class="field-label">Support I might need (from a teacher, friend, or myself):</div>
-                <div class="lined-space"></div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <div class="section-header">Teacher Notes</div>
-        <div class="section-content">
-            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px; align-items: flex-end;">
-                <div>
-                    <div class="field-label">A strength I noticed today:</div>
-                    <div class="lined-space"></div>
-                </div>
-                <div>
-                    <div class="field-label">Progress Status:</div>
-                    <div class="bubble-group" style="flex-direction: column; gap: 4px; align-items: flex-start; margin-top: 4px;">
-                        <div class="bubble-option"><span class="checkbox"></span> Moving forward</div>
-                        <div class="bubble-option"><span class="checkbox"></span> Needs more support</div>
-                        <div class="bubble-option"><span class="checkbox"></span> Ready for next challenge</div>
+                    <div class="field-label">Progress:</div>
+                    <div class="bubble-group" style="flex-direction: column; gap: 2px; margin-top: 2px;">
+                        <div class="bubble-opt"><span class="checkbox"></span> On track</div>
+                        <div class="bubble-opt"><span class="checkbox"></span> Needs support</div>
+                        <div class="bubble-opt"><span class="checkbox"></span> Next level</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="consent-area">
-        I understand this tool is here to help me practice and grow. I can always ask for help or suggest changes to my plan.
-        <div class="signature-line">
-            <span class="sig-label">My Signature:</span>
+    
+    <div class="consent">
+        This tool helps me grow. I can ask for help or changes anytime.
+        <div class="sig-line">
+            <span style="font-size: 6pt; font-weight: bold;">Signature:</span>
             <div class="sig-field"></div>
         </div>
     </div>
     
-    <div class="page-footer">
-        <span>Your information is private and stored securely</span>
-        <span style="font-weight: bold;">PAGE 2 of 2</span>
-    </div>
+    <div class="footer">Private & secure • My Daily Growth Tracker v3</div>
 
 </body>
 </html>
